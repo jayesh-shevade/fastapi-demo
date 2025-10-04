@@ -1,7 +1,7 @@
 import os
 from fastapi import FastAPI, Request
 from fastapi.responses import RedirectResponse, HTMLResponse
-from fastapi.middleware.sessions import SessionMiddleware
+from starlette.middleware.sessions import SessionMiddleware
 from msal import ConfidentialClientApplication
 from dotenv import load_dotenv
 
@@ -10,7 +10,8 @@ load_dotenv()
 app = FastAPI()
 
 # ✅ Add session middleware (required for login state)
-app.add_middleware(SessionMiddleware, secret_key="your_secret_key_here")
+app.add_middleware(SessionMiddleware, secret_key=os.getenv("SESSION_SECRET"))
+
 
 # 🔐 Azure AD / Entra ID settings
 CLIENT_ID = os.getenv("CLIENT_ID")
