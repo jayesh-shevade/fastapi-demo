@@ -3,3 +3,4 @@ uvicorn
 gunicorn
 msal
 python-dotenv
+python-multipart
